@@ -1,27 +1,22 @@
-
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Domain;
 using MediatR;
 using Persistence;
-using Domain;
 
 namespace Application.Activities
 {
     public class Details
     {
-        public class Query :IRequest<Activity>
+        public class Query : IRequest<Activity>
         {
-            private object value;
-
-            public Query(object value)
-            {
-                this.value = value;
-            }
-
-            public Guid Id {get; set; }
+            public Guid Id { get; set; }
         }
+
         public class Handler : IRequestHandler<Query, Activity>
         {
-            private DataContext _context;
-
+            private readonly DataContext _context;
             public Handler(DataContext context)
             {
                 _context = context;
